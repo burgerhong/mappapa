@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "18191896123",
+    "firebase_url": "https://mappapa-a66df.firebaseio.com",
+    "project_id": "mappapa-a66df",
+    "storage_bucket": "mappapa-a66df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18191896123:android:5640c7f179a977b7",
+        "android_client_info": {
+          "package_name": "com.example.jason.mappapa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18191896123-5ee5k4uslpss45gm8l1coqp5jj6rvimc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jason.mappapa",
+            "certificate_hash": "371f9e164f916cdae5f4cfc187384c8c3b09a35e"
+          }
+        },
+        {
+          "client_id": "18191896123-in2sj2tre2h3ff7khbl2qid1ac65lh1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCDD3jI0QGxeXtbo2Xp-tb7Oe4w0tC8C8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18191896123-in2sj2tre2h3ff7khbl2qid1ac65lh1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
