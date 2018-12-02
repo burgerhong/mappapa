@@ -30,7 +30,8 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+
+            android:name=".acceptDelivery"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,16 +39,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DeliverActivity" />
+        <activity android:name=".timePicker" />
         <activity android:name=".popUp" />
         <activity android:name=".confirmDelivery" />
         <activity
-            android:name=".timePicker"
+            android:name=".MapsActivity"
             android:label="@string/title_activity_time_picker"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".pinDeliveryLocation"
-            android:label="@string/title_activity_pin_delivery_location"></activity>
+            android:label="@string/title_activity_pin_delivery_location" />
+        <activity android:name=".DeliverActivity"></activity>
     </application>
 
 </manifest>

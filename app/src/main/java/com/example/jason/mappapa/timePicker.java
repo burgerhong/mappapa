@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,26 +64,34 @@ public class timePicker extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 hour = timePicker1.getCurrentHour();
-                 minute = timePicker1.getCurrentMinute();
-                 int hourMax;
-                 if(hour==23) {
-                     hourMax = 0;
-                 }
-                 else{
-                     hourMax = hour +1;
-                 }
-                 DatabaseReference dbAddTimeSlot = FirebaseDatabase.getInstance().getReference();
-                 DatabaseReference dbAddTime = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_"+slotCounter).child("pickUpTime");
-                 DatabaseReference dbAddSlotID = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_"+slotCounter).child("slotID");
-                 dbAddSlotID.setValue("slot_"+slotCounter);
-                 dbAddTime.setValue(String.valueOf(hour)+String.valueOf(minute)+"-"+String.valueOf(hourMax)+String.valueOf(minute));
-                 slotCounter++;
-                 DatabaseReference dbAddSlotCounter = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotCount");
-                 dbAddSlotCounter.setValue(slotCounter);
-                Log.d("timepuki", String.valueOf(hour)+String.valueOf(minute));
+                hour = timePicker1.getCurrentHour();
+                minute = timePicker1.getCurrentMinute();
+                if (hour >= 11 && hour < 21) {
+
+                    int hourMax;
+                    if (hour == 23) {
+                        hourMax = 0;
+                    } else {
+                        hourMax = hour + 1;
+                    }
+                    DatabaseReference dbAddTimeSlot = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference dbAddTime = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_" + slotCounter).child("pickUpTime");
+                    DatabaseReference dbAddSlotID = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_" + slotCounter).child("slotID");
+                    dbAddSlotID.setValue("slot_" + slotCounter);
+                    dbAddTime.setValue(String.valueOf(hour) + String.valueOf(minute) + "-" + String.valueOf(hourMax) + String.valueOf(minute));
+                    slotCounter++;
+                    DatabaseReference dbAddSlotCounter = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotCount");
+                    dbAddSlotCounter.setValue(slotCounter);
+                    Toast.makeText(timePicker.this, "Time slot added!", Toast.LENGTH_LONG).show();
+                    finish();
+
+                } else {
+                    Toast.makeText(timePicker.this, "Please enter time between 11am - 9pm", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
+
 
     }
 

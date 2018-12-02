@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     int locationCounter;
     String userID1 = "Super Lau";
     String userID2 = "Bobby Tan";
-    String userID3 = "JasonKing";
+    String userID3 = "Jason";
 
     ArrayList<String> locationList = new ArrayList<String>();
 
@@ -74,10 +74,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("okok", "huhu");
-                ArrayList<String> locationList = new ArrayList<String>();
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("user").getValue().toString().equals(userID2)) {
-                        userName = locationSnapshot.child("user").getValue().toString();
+                    if (locationSnapshot.child("user").getValue().toString().equals(userID3)) {
+               //         userName = locationSnapshot.child("deliverList").child("requester").getValue().toString();
                         slotIDD = locationSnapshot.child("slotID").getValue().toString();
                         setmMap();
                     }
@@ -215,11 +214,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String hohoho = "";
                     String splitEqual[] = locationList.get(i).split("=");
 
-                    String splitOther1[] = splitEqual[1].split(Pattern.quote(","));
+                    String splitOther1[] = splitEqual[2].split(Pattern.quote(","));
                     final double showLatitude = Double.parseDouble(splitOther1[0]);
 
-                    String splitOther2[] = splitEqual[2].split(Pattern.quote("}"));
+                    String splitOther2[] = splitEqual[3].split(Pattern.quote("}"));
                     final double showLongitude = Double.parseDouble(splitOther2[0]);
+
+                    String splitOther3[] =splitEqual[1].split(Pattern.quote(","));
+                    userName = splitOther3[0];
 
                     List<Address> addresses = null;
                     try {

@@ -45,22 +45,29 @@ public class confirmDelivery extends AppCompatActivity {
         Double latitude = null;
         Double longitude =null;
 
+        String address = null;
+        String requester = null;
+
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
         if(b!=null)
         {
-            slotID = (String) b.get("slotID");
+            address = (String) b.get("address");
             latitude = (Double) b.get("latitude");
             longitude = (Double) b.get("longitude");
+            slotID = (String) b.get("slotID");
+            requester =(String)b.get("user");
         }
-        final String finalslotID = slotID;
+        final String finaladdress = address;
         final Double finallatitude = latitude;
         final Double finallongitude = longitude;
+        final String finalslotID = slotID;
+        final String finalrequester = requester;
 
         TextView nearLocation = findViewById(R.id.textView7);
 
-        Geocoder gcd = new Geocoder(this, Locale.getDefault());
+      /*  Geocoder gcd = new Geocoder(this, Locale.getDefault());
         List<Address> addresses = null;
         try {
             addresses = gcd.getFromLocation(finallatitude,finallongitude,1);
@@ -70,7 +77,9 @@ public class confirmDelivery extends AppCompatActivity {
         if (addresses.size()>0){
             String addressLine = addresses.get(0).getAddressLine(0);
             nearLocation.setText(addressLine);
-        }
+        }*/
+
+        nearLocation.setText(address);
 
 
         DatabaseReference currentLocationCounter =FirebaseDatabase.getInstance().getReference().child("delivery").child("timeSlot").child("slotList").child(finalslotID);
@@ -96,8 +105,12 @@ public class confirmDelivery extends AppCompatActivity {
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference addDBlatitude = databaseReference.child("delivery").child("timeSlot").child("slotList").child(finalslotID).child("deliverList").child("Location_" + locationCounter + "").child("latitude");
                 DatabaseReference addDBlongitude = databaseReference.child("delivery").child("timeSlot").child("slotList").child(finalslotID).child("deliverList").child("Location_" + locationCounter + "").child("longitude");
+                DatabaseReference addDBrequester = databaseReference.child("delivery").child("timeSlot").child("slotList").child(finalslotID).child("deliverList").child("Location_" + locationCounter + "").child("requester");
                 addDBlatitude.setValue(finallatitude);
                 addDBlongitude.setValue(finallongitude);
+                addDBrequester.setValue(finalrequester);
+
+                // RMB TO DELETE TEMPORARY LIST
 
                 DatabaseReference dbcurrentLocationCount = databaseReference.child("delivery").child("timeSlot").child("slotList").child(finalslotID).child("locationCount");
                 locationCounter++;

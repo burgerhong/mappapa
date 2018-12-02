@@ -17,7 +17,7 @@
         android:text="Confirm"
         app:layout_constraintEnd_toStartOf="@+id/cancelButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poptextViewRating" />
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewSlot" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -27,10 +27,10 @@
         android:layout_marginEnd="57dp"
         android:text="Return"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poptextViewShortDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewUserName" />
 
     <TextView
-        android:id="@+id/poptextViewTitle"
+        android:id="@+id/poptextViewAddress"
         android:layout_width="265dp"
         android:layout_height="65dp"
         android:layout_marginStart="87dp"
@@ -45,10 +45,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/poptextViewShortDesc"
+        android:id="@+id/poptextViewUserName"
         android:layout_width="256dp"
         android:layout_height="65dp"
-        android:layout_below="@id/poptextViewTitle"
+        android:layout_below="@id/poptextViewAddress"
         android:layout_marginStart="82dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="76dp"
@@ -60,10 +60,10 @@
         tools:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/poptextViewRating"
+        android:id="@+id/poptextViewSlot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/poptextViewShortDesc"
+        android:layout_below="@id/poptextViewUserName"
         android:layout_marginStart="86dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="266dp"
@@ -76,7 +76,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poptextViewShortDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewUserName" />
 
     <TextView
         android:id="@+id/textView3"
@@ -105,7 +105,7 @@
         android:textSize="8pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poptextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewAddress"
         tools:textColor="@android:color/black" />
 
 </android.support.constraint.ConstraintLayout>

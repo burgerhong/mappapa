@@ -80,9 +80,9 @@ public class locationAdapter extends RecyclerView.Adapter<locationAdapter.Locati
                 }
             });
 
-            textViewTitle = itemView.findViewById(R.id.poptextViewTitle);
-            textViewShortDesc = itemView.findViewById(R.id.poptextViewShortDesc);
-            textViewRating = itemView.findViewById(R.id.poptextViewRating);
+            textViewTitle = itemView.findViewById(R.id.poptextViewAddress);
+            textViewShortDesc = itemView.findViewById(R.id.poptextViewUserName);
+            textViewRating = itemView.findViewById(R.id.poptextViewSlot);
           //  textViewPrice = itemView.findViewById(R.id.textViewPrice);
           //  imageView = itemView.findViewById(R.id.imageView);
         }

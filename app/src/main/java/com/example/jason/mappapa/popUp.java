@@ -1,10 +1,8 @@
 package com.example.jason.mappapa;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -16,6 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class popUp extends AppCompatActivity {
 
@@ -42,6 +43,7 @@ public class popUp extends AppCompatActivity {
         String userID = null;
         String pickupTime = null;
         String slotID = null;
+        final String userID1 ="Mr Ali";
         Double latitude = null;
         Double longitude = null;
 
@@ -56,11 +58,11 @@ public class popUp extends AppCompatActivity {
             latitude = (Double) b.get("latitude");
             longitude = (Double) b. get("longitude");
         }
-        textViewUser = findViewById(R.id.poptextViewShortDesc);
-        textViewUser.setText(userID);
-        textViewTime = findViewById(R.id.poptextViewTitle);
+        textViewTime = findViewById(R.id.poptextViewAddress);
         textViewTime.setText(pickupTime);
-        textViewSlotID = findViewById(R.id.poptextViewRating);
+        textViewUser = findViewById(R.id.poptextViewUserName);
+        textViewUser.setText(userID);
+        textViewSlotID = findViewById(R.id.poptextViewSlot);
         textViewSlotID.setText(slotID);
 
         Button btn = (Button)findViewById(R.id.confirmButton);
@@ -82,7 +84,17 @@ public class popUp extends AppCompatActivity {
                 Log.d("hola",finalslotID);
                 Log.d("hola",finallatitude.toString());
                 Log.d("hola",finallongitude.toString());
-                displayNotification(v);
+
+                DatabaseReference temporaryLocation = FirebaseDatabase.getInstance().getReference("delivery").child("timeSlot").child("slotList").child(finalslotID);
+                DatabaseReference addtemporaryLocationLat = temporaryLocation.child("temporaryList").child(userID1).child("latitude");
+                DatabaseReference addtemporaryLocationLong = temporaryLocation.child("temporaryList").child(userID1).child("longitude");
+                DatabaseReference addtemporaryUser = temporaryLocation.child("temporaryList").child(userID1).child("tempUser");
+
+                addtemporaryLocationLat.setValue(finallatitude);
+                addtemporaryLocationLong.setValue(finallongitude);
+                addtemporaryUser.setValue(userID1);
+
+              //  displayNotification(v);
              /*   String title = "Delivery Request Notification".trim();
                 String subject = "New delivery Request".trim();
                 String body = "Click to reply the request".trim();

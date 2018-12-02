@@ -27,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/imageView"
-                android:text="0000-0100"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textStyle="bold" />
 
@@ -39,7 +38,6 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/imageView"
-                android:text="Jason Tan Si Hong"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 tools:textColor="@android:color/black" />
 
