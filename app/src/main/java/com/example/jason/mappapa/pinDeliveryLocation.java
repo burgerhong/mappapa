@@ -1,10 +1,16 @@
 package com.example.jason.mappapa;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,6 +21,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class pinDeliveryLocation extends FragmentActivity implements OnMapReadyCallback {
 
@@ -23,6 +35,7 @@ public class pinDeliveryLocation extends FragmentActivity implements OnMapReadyC
     double latitude ;
     double longitude ;
     boolean onButton = false ;
+    String addressLine = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +74,42 @@ public class pinDeliveryLocation extends FragmentActivity implements OnMapReadyC
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                latitude = globalLatLng.latitude;
+
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(pinDeliveryLocation.this, android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(pinDeliveryLocation.this);
+                }
+                builder.setTitle("Confirm details")
+                        .setMessage("Are you sure the information is correct?\n"+"Time:"+finalpickupTime+"\n"+"User:"+finalUserID+"\n"+"Location:"+addressLine)
+                     //   .setMessage("Time:"+finalpickupTime+"/n")
+                     //   .setMessage("User:"+finalUserID+"/n")
+                     //   .setMessage("Location:"+addressLine+"/n")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                                DatabaseReference temporaryLocation = FirebaseDatabase.getInstance().getReference("delivery").child("timeSlot").child("slotList").child(finalslotID);
+                                DatabaseReference addtemporaryLocationLat = temporaryLocation.child("temporaryList").child(finalUserID).child("latitude");
+                                DatabaseReference addtemporaryLocationLong = temporaryLocation.child("temporaryList").child(finalUserID).child("longitude");
+                                DatabaseReference addtemporaryUser = temporaryLocation.child("temporaryList").child(finalUserID).child("tempUser");
+
+                                addtemporaryLocationLat.setValue(latitude);
+                                addtemporaryLocationLong.setValue(longitude);
+                                addtemporaryUser.setValue(finalUserID);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
+
+             /*   latitude = globalLatLng.latitude;
                 longitude = globalLatLng.longitude;
                 Intent intent = new Intent(pinDeliveryLocation.this, popUp.class);
                 intent.putExtra("latitude",latitude);
@@ -69,7 +117,7 @@ public class pinDeliveryLocation extends FragmentActivity implements OnMapReadyC
                 intent.putExtra("userID",finalUserID);
                 intent.putExtra("pickupTime",finalpickupTime);
                 intent.putExtra("slotID",finalslotID);
-                pinDeliveryLocation.this.startActivity(intent);
+                pinDeliveryLocation.this.startActivity(intent); */
 
             }
         });
@@ -101,9 +149,25 @@ public class pinDeliveryLocation extends FragmentActivity implements OnMapReadyC
             public void onMapLongClick(LatLng latLng) {
                 mMap.clear();
                 globalLatLng = latLng;
+                latitude = globalLatLng.latitude;
+                longitude = globalLatLng.longitude;
+
+                Geocoder gcd = new Geocoder(pinDeliveryLocation.this,Locale.getDefault());
+                List<Address> addresses = null;
+                try {
+                    addresses = gcd.getFromLocation(latitude,longitude,1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (addresses.size()>0){
+                    addressLine = addresses.get(0).getAddressLine(0);
+                    Log.d("o0o",addressLine);
+                    // holder.textViewAddress.setText(addressLine);
+                }
+
                 mMap.addMarker(new MarkerOptions()
                         .position(latLng)
-                        .title("You are here")
+                        .title(addressLine)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                 onButton = true;
             }

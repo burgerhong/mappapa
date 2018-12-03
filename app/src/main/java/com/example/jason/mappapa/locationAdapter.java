@@ -72,8 +72,8 @@ public class locationAdapter extends RecyclerView.Adapter<locationAdapter.Locati
                 public void onClick(View v) {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, pinDeliveryLocation.class);
-                        intent.putExtra("userID",textViewTitle.getText());
-                        intent.putExtra("pickupTime",textViewShortDesc.getText());
+                        intent.putExtra("pickupTime",textViewTitle.getText());
+                        intent.putExtra("userID",textViewShortDesc.getText());
                         intent.putExtra("slotID",textViewRating.getText());
                         context.startActivity(intent);
 
