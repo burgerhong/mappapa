@@ -82,7 +82,7 @@ public class pinDeliveryLocation extends FragmentActivity implements OnMapReadyC
                     builder = new AlertDialog.Builder(pinDeliveryLocation.this);
                 }
                 builder.setTitle("Confirm details")
-                        .setMessage("Are you sure the information is correct?\n"+"Time:"+finalpickupTime+"\n"+"User:"+finalUserID+"\n"+"Location:"+addressLine)
+                        .setMessage("Are you sure the information is correct?\n"+"Time:"+finalpickupTime+"\n"+"User:"+finalUserID+"\n"+"Location:\n"+addressLine)
                      //   .setMessage("Time:"+finalpickupTime+"/n")
                      //   .setMessage("User:"+finalUserID+"/n")
                      //   .setMessage("Location:"+addressLine+"/n")

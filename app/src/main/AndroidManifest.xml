@@ -31,7 +31,7 @@
 
         <activity
 
-            android:name=".DeliverActivity"
+            android:name=".acceptDelivery"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +49,7 @@
         <activity
             android:name=".pinDeliveryLocation"
             android:label="@string/title_activity_pin_delivery_location" />
-        <activity android:name=".acceptDelivery"></activity>
+        <activity android:name=".DeliverActivity"></activity>
     </application>
 
 </manifest>
